@@ -62,18 +62,17 @@ async function initDB() {
 // Email transporter (optioneel)
 let transporter = null;
 if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
-  transporter = nodemailer.createTransporter({
+  transporter = nodemailer.createTransport({
     service: process.env.SMTP_SERVICE || 'gmail',
-    auth: { 
-      user: process.env.EMAIL_USER, 
-      pass: process.env.EMAIL_PASS 
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS
     }
   });
   console.log('Email transporter configured');
 } else {
   console.log('Email not configured - set EMAIL_USER and EMAIL_PASS environment variables');
 }
-
 // Google Calendar (optioneel)
 let calendar = null;
 if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET && process.env.GOOGLE_REFRESH_TOKEN) {
